@@ -29,6 +29,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@sveltejs/adapter-static": "^2.0.1",
 		"devalue": "^4.3.0",
 		"nanoid": "^4.0.2"
 	}
