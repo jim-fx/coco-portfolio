@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { createWindow, settings } from '$lib/data';
+	import { base } from '$app/paths';
 	import programs from 'lib/programs';
 </script>
 
 <div
-	style={`background-image: url(/wallpapers/${$settings.wallpaper}); background-size: ${
+	style={`background-image: url(${base}/wallpapers/${$settings.wallpaper}); background-size: ${
 		$settings.wallpaper.startsWith('tiled-') ? 'unset' : 'cover'
 	}`}
 >
