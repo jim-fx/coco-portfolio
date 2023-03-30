@@ -5,7 +5,7 @@
 </script>
 
 <div
-	style={`background-image: url(${base}/wallpapers/${$settings.wallpaper}); background-size: ${
+	style={`background-image: url(wallpapers/${$settings.wallpaper}); background-size: ${
 		$settings.wallpaper.startsWith('tiled-') ? 'unset' : 'cover'
 	}`}
 >
