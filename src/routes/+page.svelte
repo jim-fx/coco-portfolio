@@ -1,9 +1,9 @@
 <script lang="ts">
 	import Window from '$lib/components/Window.svelte';
-	import { windows, createWindow } from '$lib/data';
+	import { windows } from '$lib/data';
 	import programs, { loadProgram } from '$lib/programs';
 	function handleActivate(id: string) {
-		$windows = $windows.map((w) => {
+		$windows = $windows.filter(Boolean).map((w) => {
 			if (w.id === id) {
 				w.active = true;
 			} else {
@@ -20,9 +20,27 @@
 			];
 		}
 	}
+
+	function handleMaximize(id: string) {
+		$windows = $windows.filter(Boolean).map((w) => {
+			if (w.id === id) {
+				w.view = w.view === 'maximized' ? 'normal' : 'maximized';
+			}
+			return w;
+		});
+	}
+
+	function handleMinimize(id: string) {
+		$windows = $windows.filter(Boolean).map((w) => {
+			if (w.id === id) {
+				w.view = w.view === 'minimized' ? 'normal' : 'minimized';
+			}
+			return w;
+		});
+	}
 </script>
 
-{#each $windows as w (w.id)}
+{#each $windows.filter(Boolean) as w (w.id)}
 	<Window
 		title={w.title}
 		icon={programs[w.programId].icon}
@@ -30,14 +48,20 @@
 		bind:y={w.y}
 		bind:width={w.width}
 		bind:height={w.height}
+		bind:minWidth={w.minWidth}
+		bind:minHeight={w.minHeight}
 		active={w.active}
+		resizable={w.resizable}
+		view={w.view}
 		on:close={() => ($windows = $windows.filter((w2) => w2.id !== w.id))}
+		on:maximize={() => handleMaximize(w.id)}
+		on:minimize={() => handleMinimize(w.id)}
 		on:activate={() => handleActivate(w.id)}
 	>
 		{#await loadProgram(w.programId)}
 			<p>Loading</p>
 		{:then component}
-			<svelte:component this={component} data={w.programData} bind:window={w} />
+			<svelte:component this={component} data={w.programData} bind:w />
 		{/await}
 	</Window>
 {/each}

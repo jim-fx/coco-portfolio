@@ -23,7 +23,6 @@ function createLocalStore<T>(key: string, initialValue: T | Writable<T>) {
         store = writable(initialValue);
       }
     } else {
-      console.log({ value });
       store = writable(value);
     }
   } else {

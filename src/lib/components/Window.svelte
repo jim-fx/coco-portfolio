@@ -8,8 +8,13 @@
 	export let width = 300;
 	export let height = 300;
 	export let active = false;
+	export let resizable = true;
+	export let view = 'normal';
 
 	export let icon = '';
+
+	export let minHeight = 300;
+	export let minWidth = 200;
 
 	let mouseDown = false;
 	let mouseDownX = 0;
@@ -34,8 +39,8 @@
 
 	function handleMouseMove(event: MouseEvent) {
 		if (mouseDown) {
-			x = downX + (event.clientX - mouseDownX);
-			y = downY + (event.clientY - mouseDownY);
+			x = Math.max(Math.min(downX + (event.clientX - mouseDownX), window.innerWidth - width), 0);
+			y = Math.max(Math.min(downY + (event.clientY - mouseDownY), window.innerHeight - height), 0);
 		}
 	}
 </script>
@@ -43,12 +48,20 @@
 <svelte:window on:mouseup={handleMouseUp} on:mousemove={handleMouseMove} />
 
 <div
-	class="window"
-	style={`left: ${x}px; top: ${y}px; width: ${width}px; height: ${height}px; z-index: ${
-		active ? '100' : '1'
-	}`}
+	class="window view-{view}"
+	style={`
+    left: ${x}px; 
+    top: ${y}px; 
+    width: ${width}px; 
+    height: ${height}px; 
+    z-index: ${active ? '100' : '1'};
+    min-width: ${minWidth}px;
+    min-height: ${minHeight}px;
+`}
 >
-	<ResizeWindow bind:x bind:y bind:height bind:width />
+	{#if resizable}
+		<ResizeWindow bind:x bind:y bind:height bind:width />
+	{/if}
 
 	<div class="title-bar" on:mousedown={handleMouseDown}>
 		{#if icon}
@@ -72,11 +85,24 @@
 	.window {
 		position: absolute;
 	}
+
+	.window.view-maximized {
+		left: 10px !important;
+		top: 10px !important;
+		height: calc(100vh - 30px) !important;
+		width: calc(100vw - 30px) !important;
+	}
 	img {
 		height: 16px;
 	}
 	.window-body > div {
 		overflow: hidden;
 		max-height: 100%;
+	}
+	.title-bar-text {
+		flex: 1;
+		margin-left: 8px;
+		pointer-events: none;
+		user-select: none;
 	}
 </style>

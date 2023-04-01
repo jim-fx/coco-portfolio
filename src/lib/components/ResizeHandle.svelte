@@ -5,8 +5,15 @@
 	export let width: number;
 	export let height: number;
 
-	export let minHeight = 300;
-	export let minWidth = 100;
+	export let minHeight = 200;
+	export let minWidth = 400;
+
+	$: if (height) {
+		height = Math.max(height, minHeight);
+	}
+	$: if (width) {
+		width = Math.max(width, minWidth);
+	}
 
 	export let x: number;
 	export let y: number;
