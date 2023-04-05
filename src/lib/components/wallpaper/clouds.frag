@@ -1,6 +1,6 @@
 precision highp float;
 
-const float cloudscale = 1.8;
+const float cloudscale = 10.0;
 const float speed = 0.01;
 const float clouddark = 0.5;
 const float cloudlight = 0.3;

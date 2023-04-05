@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { T, useFrame } from '@threlte/core';
 	import vertShader from './clouds.vert';
 	import fragShader from './clouds.frag';
@@ -13,7 +13,8 @@
 </script>
 
 <T.Mesh>
-	<T.PlaneGeometry attach="geometry" args={[10, 10]} />
+	<T.OrthographicCamera args={[-1, 1, 1, -1, 0, 1]} makeDefault />
+	<T.PlaneGeometry attach="geometry" args={[1000, 1000]} />
 	<T.ShaderMaterial
 		vertexShader={vertShader}
 		fragmentShader={fragShader}
