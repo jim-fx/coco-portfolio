@@ -24,20 +24,18 @@
 	{#await wallpapers[wallpaper].component()}
 		<div>Loading...</div>
 	{:then comp}
-		<div class="image black">
-			<div class="image bounce">
-				<Canvas size={{ width: 80, height: 80 }}>
-					<svelte:component this={comp.default} />
-				</Canvas>
-			</div>
+		<div class="image">
+			<svelte:component this={comp.default} />
 		</div>
 	{/await}
 {:else if imageUrl}
 	<div
 		class="image"
-		style={`background-image: url(${imageUrl}); background-size: ${
-			imageUrl.includes('tiled-') ? 'unset' : 'cover'
-		}`}
+		style={`
+      background-image: url(${imageUrl}); 
+      background-size: ${imageUrl.includes('tiled-') ? 'unset' : 'cover'};
+      image-rendering: ${imageUrl.includes('pixel-') ? 'pixelated' : 'unset'};
+`}
 	/>
 {/if}
 
@@ -52,36 +50,5 @@
 		pointer-events: none;
 		object-fit: cover;
 		background-position: center;
-	}
-	.image :global(canvas) {
-		width: 20vw !important;
-		height: 20vw !important;
-		image-rendering: pixelated;
-	}
-
-	.black {
-		background-color: black;
-	}
-
-	.bounce {
-		animation: moveX 12s linear 6s infinite alternate, moveY 12s linear 0s infinite alternate;
-	}
-
-	@keyframes moveX {
-		from {
-			left: 0;
-		}
-		to {
-			left: calc(100vw - 20vw);
-		}
-	}
-
-	@keyframes moveY {
-		from {
-			top: 0;
-		}
-		to {
-			top: calc(100vh - 20vw);
-		}
 	}
 </style>

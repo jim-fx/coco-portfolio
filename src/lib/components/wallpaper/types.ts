@@ -1,6 +1,12 @@
 export const wallpapers = {
+  default: {
+    image: "wallpaper.jpg"
+  },
   clouds: {
     image: "clouds.jpg",
+  },
+  "clouds-animated": {
+    component: () => import("./Clouds.svelte")
   },
   bricks: {
     image: "tiled-bricks.png",
@@ -13,7 +19,7 @@ export const wallpapers = {
   },
   cube: {
     component: () => import("./Cube.svelte"),
-  }
+  },
 } as const;
 
 export type WallpaperKey = keyof typeof wallpapers;

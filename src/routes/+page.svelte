@@ -2,6 +2,7 @@
 	import Window from '$lib/components/Window.svelte';
 	import { windows } from '$lib/data';
 	import programs, { loadProgram } from '$lib/programs';
+
 	function handleActivate(id: string) {
 		$windows = $windows.filter(Boolean).map((w) => {
 			if (w.id === id) {

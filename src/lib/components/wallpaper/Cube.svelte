@@ -1,34 +1,57 @@
 <script lang="ts">
-	import { T, useFrame } from '@threlte/core';
-	import { GLTF, useGltfAnimations } from '@threlte/extras';
-	import { Euler, OrthographicCamera } from 'three';
-
-	const { gltf, actions } = useGltfAnimations<'Take 001'>();
-
-	$: if ($actions) {
-		Object.entries($actions).forEach(([name, action]) => {
-			action.play();
-		});
-	}
-
-	const rotation = [0, 0, 0] as [number, number, number];
-
-	useFrame(() => {
-		rotation[0] += 0.004;
-		rotation[1] += 0.004;
-		rotation[2] += 0.004;
-	});
+	import { Canvas } from '@threlte/core';
+	import CubeInner from './CubeInner.svelte';
 </script>
 
-<!-- <T.OrthographicCamera args={[-10, 1, 1, -1, 0, 100]} makeDefault /> -->
-<T.PerspectiveCamera position={[0, 0, 5]} args={[50, 1, 0.1, 1000]} makeDefault />
+<div class="image black">
+	<div class="image bounce">
+		<Canvas size={{ width: 80, height: 80 }}>
+			<CubeInner />
+		</Canvas>
+	</div>
+</div>
 
-<T.AmbientLight />
+<style>
+	.image {
+		position: absolute;
+		width: 100vw;
+		height: 100vh;
+		top: 0;
+		left: 0;
+		z-index: -1;
+		pointer-events: none;
+		object-fit: cover;
+		background-position: center;
+	}
+	.black {
+		background-color: #018184;
+	}
 
-<GLTF
-	{rotation}
-	bind:gltf={$gltf}
-	url="cube.glb"
-	useDraco="https://www.gstatic.com/draco/v1/decoders/"
-/>
+	.bounce {
+		animation: moveX 12s linear 6s infinite alternate, moveY 12s linear 0s infinite alternate;
+	}
 
+	.image :global(canvas) {
+		width: 20vw !important;
+		height: 20vw !important;
+		image-rendering: pixelated;
+	}
+
+	@keyframes moveX {
+		from {
+			left: 0;
+		}
+		to {
+			left: calc(100vw - 20vw);
+		}
+	}
+
+	@keyframes moveY {
+		from {
+			top: 0;
+		}
+		to {
+			top: calc(100vh - 20vw);
+		}
+	}
+</style>

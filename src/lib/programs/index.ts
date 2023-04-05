@@ -7,6 +7,7 @@ const programs = {
   },
   settings: {
     component: () => import("./Settings.svelte"),
+    unique: true,
     icon: "https://win98icons.alexmeub.com/icons/png/paint_file-2.png",
   }
 }

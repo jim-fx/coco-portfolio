@@ -1,6 +1,5 @@
 import { localStore } from '$lib/stores';
 import type { ProgramID } from 'lib/programs';
-import { tick } from 'svelte';
 
 export type CustomWindow = {
   id: string;
@@ -27,9 +26,6 @@ export function createWindow(w: Omit<CustomWindow, "id" | "view">) {
     minWidth: w.minWidth ?? 200,
     id: Math.random().toString(36).slice(2, 9),
   }]);
-  tick().then(() => {
-    windows.update(windows => [...windows]);
-  });
   setTimeout(() => {
     windows.update(windows => [...windows]);
   }, 50);
