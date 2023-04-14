@@ -25,7 +25,7 @@
 
 	{#each _programs as [id, p]}
 		<img
-			src={base + '/' + p.icon}
+			src={base + '/icons/' + p.icon}
 			style="width: 32px; height: 32px;"
 			alt="program icon"
 			on:keypress={(e) => {
