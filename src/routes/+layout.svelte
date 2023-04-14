@@ -4,8 +4,18 @@
 	import Wallpaper from '$lib/components/wallpaper';
 	import { time } from '$lib/data';
 	import StartMenu from 'lib/components/StartMenu.svelte';
+	import { base } from '$app/paths';
 
 	let showStartMenu = false;
+
+	type ValueOf<T> = T[keyof T];
+	type Entries<T> = [keyof T, ValueOf<T>][];
+
+	// Same as `Object.entries()` but with type inference
+	function objectEntries<T extends object>(obj: T): Entries<T> {
+		return Object.entries(obj) as Entries<T>;
+	}
+	const _programs = objectEntries(programs);
 </script>
 
 <main>
@@ -13,9 +23,10 @@
 		<StartMenu />
 	{/if}
 
-	{#each Object.entries(programs) as [id, p]}
+	{#each _programs as [id, p]}
 		<img
-			src={p.icon}
+			src={base + '/' + p.icon}
+			style="width: 32px; height: 32px;"
 			alt="program icon"
 			on:keypress={(e) => {
 				if (e.key === 'Enter') {
@@ -60,6 +71,10 @@
 <style>
 	main {
 		position: relative;
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		padding: 10px;
 	}
 
 	.start-bar {

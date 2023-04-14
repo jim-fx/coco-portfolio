@@ -3,14 +3,14 @@ import type { SvelteComponent } from "svelte";
 const programs = {
   gif: {
     component: () => import("./Gif.svelte"),
-    icon: "https://win98icons.alexmeub.com/icons/png/wia_img_color_sound-0.png"
+    icon: "wia_img_color_sound-0.png"
   },
   settings: {
     component: () => import("./Settings.svelte"),
     unique: true,
-    icon: "https://win98icons.alexmeub.com/icons/png/paint_file-2.png",
+    icon: "paint_file-2.png",
   }
-}
+} as const;
 
 export type ProgramID = keyof typeof programs;
 

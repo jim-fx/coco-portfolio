@@ -4,15 +4,15 @@ import type { ProgramID } from 'lib/programs';
 export type CustomWindow = {
   id: string;
   programId: ProgramID;
-  programData: unknown,
+  programData?: unknown,
   title: string;
   x: number;
   y: number;
   height: number;
   width: number;
-  minHeight: number;
-  minWidth: number;
-  active: boolean;
+  minHeight?: number;
+  minWidth?: number;
+  active?: boolean;
   resizable?: boolean;
   view: "maximized" | "minimized" | "normal";
 }
