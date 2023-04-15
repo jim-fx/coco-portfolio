@@ -6,6 +6,7 @@
 	import { tick } from 'svelte';
 	import historyStore from 'lib/stores/historyStore';
 	import type { CustomWindow } from 'lib/data';
+	import { base } from '$app/paths';
 
 	export let w: CustomWindow;
 	w.title = 'Internet Explorer';
@@ -38,7 +39,7 @@
 	$: if (contentWrapper) updateLinks();
 
 	async function render(url: string) {
-		const response = await fetch(url);
+		const response = await fetch(base + url);
 		const input = await response.text();
 		const htmlContent = await remark().use(html, { sanitize: false }).process(input);
 
