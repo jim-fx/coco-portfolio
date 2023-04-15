@@ -56,7 +56,9 @@ jobs:
         run: pnpm install
     
       - name: Build
-        run: BASE_PATH="/${GITHUB_REPOSITORY#*/}" pnpm build
+        env:
+          BASE_PATH: ${{ github.event.repository.name }}
+        run: pnpm build
         
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1

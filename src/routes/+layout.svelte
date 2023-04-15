@@ -4,7 +4,8 @@
 	import Wallpaper from '$lib/components/wallpaper';
 	import { time } from '$lib/data';
 	import StartMenu from 'lib/components/StartMenu.svelte';
-	import { base } from '$app/paths';
+	import { clickOutside } from 'lib/helpers/clickOutside';
+	import ProgramIcon from 'lib/components/ProgramIcon.svelte';
 
 	let showStartMenu = false;
 
@@ -20,27 +21,15 @@
 
 <main>
 	{#if showStartMenu}
-		<StartMenu />
+		<div use:clickOutside on:click_outside={() => (showStartMenu = false)}>
+			<StartMenu />
+		</div>
 	{/if}
 
 	{#each _programs as [id, p]}
-		<img
-			src={base + '/icons/' + p.icon}
-			style="width: 32px; height: 32px;"
-			alt="program icon"
-			on:keypress={(e) => {
-				if (e.key === 'Enter') {
-					createWindow({
-						programId: id,
-						x: 100,
-						y: 100,
-						width: 300,
-						height: 300,
-						title: 'New'
-					});
-				}
-			}}
-			on:click={() =>
+		<ProgramIcon
+			icon={p.icon}
+			on:click={() => {
 				createWindow({
 					programId: id,
 					x: 100,
@@ -48,7 +37,8 @@
 					width: 300,
 					height: 300,
 					title: 'New'
-				})}
+				});
+			}}
 		/>
 	{/each}
 	<slot />

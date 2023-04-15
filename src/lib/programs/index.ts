@@ -1,6 +1,10 @@
 import type { SvelteComponent } from "svelte";
 
 const programs = {
+  ie: {
+    component: () => import("./InternetExplorer.svelte"),
+    icon: "msie1-5.png"
+  },
   gif: {
     component: () => import("./Gif.svelte"),
     icon: "wia_img_color_sound-0.png"

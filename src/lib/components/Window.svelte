@@ -1,6 +1,9 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 	import ResizeWindow from './ResizeWindow.svelte';
+	import ProgramIcon from './ProgramIcon.svelte';
+	import type programs from 'lib/programs';
+	import type { ProgramID } from 'lib/programs';
 
 	export let title = 'Unnamed Window';
 	export let x = 0;
@@ -11,7 +14,7 @@
 	export let resizable = true;
 	export let view = 'normal';
 
-	export let icon = '';
+	export let icon: typeof programs[ProgramID]['icon'];
 
 	export let minHeight = 300;
 	export let minWidth = 200;
@@ -65,7 +68,7 @@
 
 	<div class="title-bar" on:mousedown={handleMouseDown}>
 		{#if icon}
-			<img src={icon} alt="program icon" />
+			<ProgramIcon {icon} size="small" />
 		{/if}
 		<div class="title-bar-text">{title}</div>
 		<div class="title-bar-controls">
@@ -92,11 +95,12 @@
 		height: calc(100vh - 30px) !important;
 		width: calc(100vw - 30px) !important;
 	}
-	img {
-		height: 16px;
+	.window-body {
+		overflow: auto;
+		height: calc(100% - 40px);
 	}
 	.window-body > div {
-		overflow: hidden;
+		overflow: auto;
 		max-height: 100%;
 	}
 	.title-bar-text {

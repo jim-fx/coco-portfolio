@@ -28,6 +28,6 @@
 		transform: rotate(-90deg);
 		left: -132px;
 		color: white;
-		font-size: 1.7em;
+		font-size: 1.8em;
 	}
 </style>

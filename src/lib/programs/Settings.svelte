@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { settings } from '$lib/data';
+	import { settings, type CustomWindow } from '$lib/data';
 	import { wallpapers } from '$lib/components/wallpaper/types';
 	export let w: CustomWindow;
 	w.title = 'Settings';
