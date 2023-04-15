@@ -25,7 +25,10 @@
 		if (!contentWrapper) return '';
 		contentWrapper.querySelectorAll('a').forEach((a) => {
 			let newPath = a.getAttribute('href');
-			if (!newPath?.endsWith('.md')) return;
+			if (!newPath?.endsWith('.md')) {
+				a.setAttribute('target', '_blank');
+				return;
+			}
 			a.addEventListener('click', (e) => {
 				e.stopPropagation();
 				e.preventDefault();
