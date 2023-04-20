@@ -21,7 +21,7 @@ var introduction = `
 <br>
 
 ## TODOS für euch
-1. [Github (Pages) einrichten](https://munkelb1.pages.coco.study/cocoinfo/Portfolio-Webseite_FirstSteps.pdf)
+1. [Github (Pages) einrichten](/content/todo.md)
 
 
 <br>

@@ -2,6 +2,7 @@
 	import { remark } from 'remark';
 	import html from 'remark-html';
 	import rehypeHighlight from 'rehype-highlight';
+	import remarkGfm from 'remark-gfm';
 	import { rehype } from 'rehype';
 	import { tick } from 'svelte';
 	import historyStore from 'lib/stores/historyStore';
@@ -44,7 +45,7 @@
 	async function render(url: string) {
 		const response = await fetch(base + url);
 		const input = await response.text();
-		const htmlContent = await remark().use(html, { sanitize: false }).process(input);
+		const htmlContent = await remark().use(remarkGfm).use(html, { sanitize: false }).process(input);
 
 		const result = await rehype()
 			.data('settings', { fragment: true })

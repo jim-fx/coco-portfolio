@@ -2,7 +2,7 @@
 	import { createWindow, settings } from '$lib/data';
 	import programs from 'lib/programs';
 	import Wallpaper from '$lib/components/wallpaper';
-	import { time } from '$lib/data';
+	import { time, windows } from '$lib/data';
 	import StartMenu from 'lib/components/StartMenu.svelte';
 	import { clickOutside } from 'lib/helpers/clickOutside';
 	import ProgramIcon from 'lib/components/ProgramIcon.svelte';
@@ -17,6 +17,17 @@
 		return Object.entries(obj) as Entries<T>;
 	}
 	const _programs = objectEntries(programs);
+
+	if ($windows.length === 0) {
+		createWindow({
+			programId: 'ie',
+			x: 100,
+			y: 100,
+			width: (globalThis?.innerWidth || 800) * 0.5,
+			height: (globalThis?.innerHeight || 1000) * 0.5,
+			title: 'New'
+		});
+	}
 </script>
 
 <main>
