@@ -76,6 +76,11 @@
 		font-size: 2em;
 	}
 
+	.content :global(img) {
+		width: 90%;
+		margin-left: 5%;
+	}
+
 	.content :global(h2) {
 		font-size: 1.5em;
 	}
