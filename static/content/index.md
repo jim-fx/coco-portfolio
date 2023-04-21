@@ -28,9 +28,10 @@ var introduction = `
 <br>
 
 ## Hier werden irgendwann Links zu euren Portfolios erscheinen:
-- [Max's Website](https://max-richter.dev)
-- ...
-- ...
+- [Max's Website](https://jim-fx.github.io)
+- [Maja's Website](https://mkawecki0.github.io)
+- [Dome's Website](https://domebour.github.io)
+- [Julian's Website](https://juliangrafen.github.io/portfolio)
 
 
 <br>
