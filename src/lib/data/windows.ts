@@ -18,13 +18,22 @@ export type CustomWindow = {
   view: "maximized" | "minimized" | "normal";
 }
 
-export function createWindow(w: Omit<CustomWindow, "id" | "view">) {
+export function createWindow(w: Partial<Omit<CustomWindow, "id" | "view">>) {
+
+  const width = w?.width ?? globalThis?.innerWidth / 2;
+  const height = w?.height ?? globalThis?.innerHeight / 2;
+
   windows.update(_w => [..._w, {
-    ...w,
+    x: w.x ?? globalThis?.innerWidth / 4,
+    y: w.y ?? globalThis?.innerHeight / 4,
+    title: w.title ?? "Untitled",
+    programId: w.programId || "ie",
     resizable: w.resizable ?? true,
     view: "normal",
-    minHeight: w.minHeight ?? 300,
     minWidth: w.minWidth ?? 200,
+    minHeight: w.minHeight ?? 300,
+    width,
+    height,
     id: Math.random().toString(36).slice(2, 9),
   }]);
   setTimeout(() => {

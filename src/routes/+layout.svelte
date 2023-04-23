@@ -47,10 +47,6 @@
 			on:click={() => {
 				createWindow({
 					programId: id,
-					x: 100,
-					y: 100,
-					width: 300,
-					height: 300,
 					title: 'New'
 				});
 			}}
