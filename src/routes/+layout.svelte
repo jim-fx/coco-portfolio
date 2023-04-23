@@ -30,6 +30,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Code & Context Portfolio C/R</title>
+</svelte:head>
+
 <main>
 	{#if showStartMenu}
 		<div use:clickOutside on:click_outside={() => (showStartMenu = false)}>

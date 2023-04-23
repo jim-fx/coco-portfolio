@@ -78,8 +78,11 @@
 		</div>
 	</div>
 	<div class="window-body">
-		<div>
+		<div style="display:contents;">
 			<slot />
+		</div>
+		<div class="status-bar">
+			<slot name="status-bar" />
 		</div>
 	</div>
 </div>
