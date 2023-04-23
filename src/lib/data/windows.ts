@@ -8,6 +8,7 @@ export type CustomWindow = {
   title: string;
   x: number;
   y: number;
+  padding?: number;
   height: number;
   width: number;
   minHeight?: number;
@@ -29,7 +30,6 @@ export function createWindow(w: Omit<CustomWindow, "id" | "view">) {
   setTimeout(() => {
     windows.update(windows => [...windows]);
   }, 50);
-
 }
 
 export const windows = localStore<CustomWindow[]>("windows/v1", []);

@@ -5,6 +5,10 @@ const programs = {
     component: () => import("./InternetExplorer.svelte"),
     icon: "msie1-5.png"
   },
+  pinball: {
+    component: () => import("./Pinball.svelte"),
+    icon: "pinball-32x32.png"
+  },
   calendar: {
     component: () => import("./Calendar.svelte"),
     icon: "calendar-1.png"

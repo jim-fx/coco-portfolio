@@ -11,6 +11,7 @@
 	export let width = 300;
 	export let height = 300;
 	export let active = false;
+	export let padding: number;
 	export let resizable = true;
 	export let view = 'normal';
 
@@ -46,6 +47,8 @@
 			y = Math.max(Math.min(downY + (event.clientY - mouseDownY), window.innerHeight - height), 0);
 		}
 	}
+
+	$: console.log({ padding });
 </script>
 
 <svelte:window on:mouseup={handleMouseUp} on:mousemove={handleMouseMove} />
@@ -77,7 +80,7 @@
 			<button aria-label="Close" on:click={() => dispatch('close')} />
 		</div>
 	</div>
-	<div class="window-body">
+	<div class="window-body" style="margin: {padding}px;">
 		<div style="display:contents;">
 			<slot />
 		</div>

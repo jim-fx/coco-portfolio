@@ -51,6 +51,7 @@
 		bind:height={w.height}
 		bind:minWidth={w.minWidth}
 		bind:minHeight={w.minHeight}
+		bind:padding={w.padding}
 		active={w.active}
 		resizable={w.resizable}
 		view={w.view}
