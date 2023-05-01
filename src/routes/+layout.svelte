@@ -60,7 +60,22 @@
 	<div class="start-bar">
 		<button class="start-button" on:click={() => (showStartMenu = !showStartMenu)} />
 		<div class="bar-windows">
-			<!-- -->
+			{#each $windows.filter(Boolean).filter((w) => w.view === 'minimized') as w}
+				<div
+					class="minimized-window"
+					on:keydown={(e) => {
+						if (e.key === 'Enter') {
+							w.view = 'normal';
+						}
+					}}
+					on:click={() => {
+						w.view = 'normal';
+					}}
+				>
+					<ProgramIcon size="small" icon={programs[w.programId].icon} />
+					{w.title}
+				</div>
+			{/each}
 		</div>
 
 		<div class="bar-status status-bar-field">
@@ -101,6 +116,20 @@
 		height: 24px;
 	}
 
+	.minimized-window {
+		height: calc(100% - 8px);
+		margin-top: 1px;
+		padding: 2px;
+		border: solid thin;
+		width: fit-content;
+		display: flex;
+		align-items: center;
+		gap: 5px;
+	}
+	.minimized-window :global(img) {
+		height: 20px;
+	}
+
 	.start-button {
 		min-width: 0px !important;
 		min-height: 0px !important;
@@ -112,6 +141,9 @@
 
 	.bar-windows {
 		flex: 1;
+		display: flex;
+		gap: 5px;
+		padding-left: 5px;
 	}
 
 	.bar-status {

@@ -41,7 +41,7 @@
 	}
 </script>
 
-{#each $windows.filter(Boolean) as w (w.id)}
+{#each $windows.filter(Boolean).filter((w) => w.view !== 'minimized') as w (w.id)}
 	<Window
 		title={w.title}
 		icon={programs[w.programId].icon}

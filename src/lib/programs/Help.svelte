@@ -10,17 +10,13 @@
 	import { base } from '$app/paths';
 
 	export let w: CustomWindow;
-	w.title = 'Internet Explorer';
+	w.title = 'Help';
 	let contentWrapper: HTMLDivElement;
 	let path = historyStore('/content/index.md');
 	let content = '';
 
-	let forwardPossible = false;
-	let backwardPossible = false;
-	$: if ($path) {
-		forwardPossible = path.nextValue !== null;
-		backwardPossible = path.previousValue !== null;
-	}
+	$: forwardPossible = path?.nextValue !== null;
+	$: backwardPossible = path?.previousValue !== null;
 
 	function updateLinks() {
 		if (!contentWrapper) return '';

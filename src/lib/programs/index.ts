@@ -2,8 +2,8 @@ import type { SvelteComponent } from "svelte";
 
 const programs = {
   ie: {
-    component: () => import("./InternetExplorer.svelte"),
-    icon: "msie1-5.png"
+    component: () => import("./Help.svelte"),
+    icon: "help_book_cool-4.png"
   },
   pinball: {
     component: () => import("./Pinball.svelte"),
@@ -21,6 +21,11 @@ const programs = {
     component: () => import("./Settings.svelte"),
     unique: true,
     icon: "paint_file-2.png",
+  },
+  todo: {
+    component: () => import("./TODO.svelte"),
+    unique: true,
+    icon: "notepad_file-0.png"
   }
 } as const;
 
