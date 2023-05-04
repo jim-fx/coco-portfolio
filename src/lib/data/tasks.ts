@@ -49,7 +49,15 @@ export default [
         id: "learn-css-1",
         name: "CSS Grundlagen",
         description: "[InternetingIsHard Tutorial](https://internetingishard.netlify.app/html-and-css/hello-css/index.html)",
-      }
+      },
+      {
+        id: "learn-css-2",
+        name: "CSS Layout",
+      },
+      {
+        id: "learn-css-3",
+        name: "Fonts",
+      },
     ],
   },
   {

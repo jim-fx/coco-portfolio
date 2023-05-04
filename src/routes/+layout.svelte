@@ -20,7 +20,7 @@
 
 	if ($windows.length === 0) {
 		createWindow({
-			programId: 'ie',
+			programId: 'help',
 			x: 100,
 			y: 100,
 			width: (globalThis?.innerWidth || 800) * 0.5,
@@ -42,15 +42,18 @@
 	{/if}
 
 	{#each _programs as [id, p]}
-		<ProgramIcon
-			icon={p.icon}
-			on:click={() => {
-				createWindow({
-					programId: id,
-					title: 'New'
-				});
-			}}
-		/>
+		<span class="icon">
+			<ProgramIcon
+				icon={p.icon}
+				on:click={() => {
+					createWindow({
+						programId: id,
+						title: 'New'
+					});
+				}}
+			/>
+			<span>{id}</span>
+		</span>
 	{/each}
 	<slot />
 
@@ -156,5 +159,12 @@
 		overflow: hidden;
 		display: grid;
 		grid-template-rows: 1fr 30px;
+	}
+	.icon {
+		display: flex;
+		flex-wrap: wrap;
+		width: 32px;
+		gap: 5px;
+		margin-bottom: 10px;
 	}
 </style>

@@ -1,7 +1,7 @@
 import type { SvelteComponent } from "svelte";
 
 const programs = {
-  ie: {
+  help: {
     component: () => import("./Help.svelte"),
     icon: "help_book_cool-4.png"
   },
