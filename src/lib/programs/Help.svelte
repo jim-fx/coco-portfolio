@@ -1,13 +1,9 @@
 <script lang="ts">
-	import { remark } from 'remark';
-	import html from 'remark-html';
-	import rehypeHighlight from 'rehype-highlight';
-	import remarkGfm from 'remark-gfm';
-	import { rehype } from 'rehype';
 	import { tick } from 'svelte';
 	import historyStore from 'lib/stores/historyStore';
 	import type { CustomWindow } from 'lib/data';
 	import { base } from '$app/paths';
+	import { renderMarkdown } from 'lib/helpers/renderMarkdown';
 
 	export let w: CustomWindow;
 	w.title = 'Help';
@@ -41,13 +37,7 @@
 	async function render(url: string) {
 		const response = await fetch(base + url);
 		const input = await response.text();
-		const htmlContent = await remark().use(remarkGfm).use(html, { sanitize: false }).process(input);
-
-		const result = await rehype()
-			.data('settings', { fragment: true })
-			.use(rehypeHighlight)
-			.process(htmlContent);
-		content = result.toString();
+		content = await renderMarkdown(input);
 		await tick();
 		setTimeout(updateLinks, 100);
 	}

@@ -1,26 +1,7 @@
 <script lang="ts">
 	import type { CustomWindow } from '$lib/data/windows';
+	import dates from '$lib/data/tasks';
 	export let w: CustomWindow;
-	const dates = [
-		{
-			date: new Date('2023-04-21')
-		},
-		{
-			date: new Date('2023-05-05')
-		},
-		{
-			date: new Date('2023-05-19')
-		},
-		{
-			date: new Date('2023-05-19')
-		},
-		{
-			date: new Date('2023-06-02')
-		},
-		{
-			date: new Date('2023-06-16')
-		}
-	];
 
 	const WEEK_AMOUNT = 6;
 
@@ -70,7 +51,7 @@
 		return d.toDateString() === now.toDateString();
 	}
 
-	function isTermin(d: Date) {
+	function getTermin(d: Date) {
 		return dates.find((date) => date.date.toDateString() === d.toDateString());
 	}
 
@@ -92,25 +73,25 @@
 		<button on:click={() => (monthOffset = monthOffset - 1)}>Previous</button>
 		<button on:click={() => (monthOffset = monthOffset + 1)}>Next</button>
 	</div>
-	<div class="header">
+	<div class="content">
 		{#each days as day}
-			<p>{day}</p>
+			<p class="weekday">{day}</p>
 		{/each}
-	</div>
-	{#key currentDate}
-		{#each new Array(WEEK_AMOUNT) as _, wi}
-			<div class="week">
-				{#each days as day, di}
+		{#key currentDate}
+			{#each new Array(WEEK_AMOUNT) as _, wi}
+				{#each days as _, di}
 					{@const d = getDate(wi, di)}
+					{@const t = getTermin(d)}
 					<div
 						class="day"
 						class:active={isInCurrentMonth(d)}
-						class:termin={isTermin(d)}
+						class:termin={!!t}
 						class:today={isToday(d)}
 					>
 						{#if isInCurrentMonth(d)}
 							<span>
 								{d.getDate()}
+								{isToday(d) ? '(today)' : ''}
 							</span>
 						{:else}
 							<span>
@@ -119,14 +100,26 @@
 									.padStart(2, '0')}
 							</span>
 						{/if}
+
+						{#if t}
+							<div class="termin">
+								{t.name}
+							</div>
+						{/if}
 					</div>
 				{/each}
-			</div>
-		{/each}
-	{/key}
+			{/each}
+		{/key}
+	</div>
 </div>
 
 <style>
+	.content {
+		display: grid;
+		grid-template-columns: repeat(7, 1fr);
+		grid-template-rows: 30px repeat(6, 1fr);
+		height: 100%;
+	}
 	.wrapper {
 		display: flex;
 		flex-direction: column;
@@ -134,25 +127,15 @@
 		height: 100%;
 	}
 
-	.header {
-		display: flex;
-		justify-items: stretch;
-		width: 100%;
+	.weekday {
+		padding-left: 5px;
 		opacity: 0.5;
-		border-bottom: solid 1px black;
-	}
-
-	.header > p {
-		flex: 1;
-		margin: 5px;
-	}
-
-	.week {
-		display: flex;
-		flex: 1;
-		justify-items: stretch;
+		border-bottom: 1px solid black;
+		margin: 0px;
+		padding-top: 10px;
 		width: 100%;
-		border-bottom: solid 1px black;
+		text-overflow: ellipsis;
+		overflow: hidden;
 	}
 
 	.day {
@@ -161,10 +144,11 @@
 		background: grey;
 		padding: 5px;
 		border-right: 1px solid black;
+		border-bottom: 1px solid black;
 		box-sizing: border-box;
 	}
 
-	.day:first-child {
+	.day:nth-child(7n + 1) {
 		border-left: 1px solid black;
 	}
 

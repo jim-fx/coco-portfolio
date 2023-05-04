@@ -1,7 +1,8 @@
-type Task = {
+export type Task = {
   id: string;
   name: string;
   description?: string;
+  done?: boolean;
   date?: Date;
   tasks?: Task[];
 }
@@ -10,12 +11,12 @@ export default [
   {
     id: "setup",
     name: "First Steps",
-    description: "Setup a coding environment",
     date: new Date('2023-04-21'),
     tasks: [
       {
         id: "setup-github",
         name: "Github Account erstellen",
+        description: "Erstelle einen Github Account",
       },
       {
         id: "setup-ssh-key",
@@ -40,33 +41,35 @@ export default [
     ]
   },
   {
-    id: "setup",
+    id: "learn-css",
     name: "Learn CSS",
-    description: "Learn CSS",
-    date: new Date('2023-05-05')
+    date: new Date('2023-05-05'),
+    tasks: [
+      {
+        id: "learn-css-1",
+        name: "CSS Grundlagen",
+        description: "[InternetingIsHard Tutorial](https://internetingishard.netlify.app/html-and-css/hello-css/index.html)",
+      }
+    ],
   },
   {
-    id: "setup",
-    name: "Learn HTML",
-    description: "Learn HTML",
+    id: "tbd",
+    name: "tdb",
     date: new Date('2023-05-19')
   },
   {
-    id: "setup",
-    name: "Learn HTML",
-    description: "Learn HTML",
+    id: "tbd",
+    name: "tdb",
     date: new Date('2023-05-19')
   },
   {
-    id: "setup",
-    name: "Learn HTML",
-    description: "Learn HTML",
+    id: "tbd",
+    name: "tdb",
     date: new Date('2023-06-02')
   },
   {
-    id: "setup",
-    name: "Learn HTML",
-    description: "Learn HTML",
+    id: "tbd",
+    name: "tdb",
     date: new Date('2023-06-16')
   }
 ] satisfies Task[];

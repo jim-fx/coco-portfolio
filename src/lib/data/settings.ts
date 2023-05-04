@@ -6,5 +6,5 @@ export type Settings = {
 }
 
 export const settings = localStore<Settings>("settings/v1", {
-  wallpaper: "clouds"
+  wallpaper: "default"
 })

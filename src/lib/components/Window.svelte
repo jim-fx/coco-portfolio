@@ -15,7 +15,7 @@
 	export let resizable = true;
 	export let view = 'normal';
 
-	export let icon: typeof programs[ProgramID]['icon'];
+	export let icon: (typeof programs)[ProgramID]['icon'];
 
 	export let minHeight = 300;
 	export let minWidth = 200;
@@ -103,7 +103,9 @@
 	}
 	.window-body {
 		overflow: auto;
-		height: calc(100% - 40px);
+		width: unset !important;
+		cursor: unset !important;
+		height: calc(100% - 40px) !important;
 	}
 	.window-body > div {
 		overflow: auto;
