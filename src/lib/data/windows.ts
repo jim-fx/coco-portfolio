@@ -23,11 +23,14 @@ export function createWindow(w: Partial<Omit<CustomWindow, "id" | "view">>) {
   const width = w?.width ?? globalThis?.innerWidth / 2;
   const height = w?.height ?? globalThis?.innerHeight / 2;
 
+  //@ts-ignore
+  w.programId === "ie" && (w.programId = "help");
+
   windows.update(_w => [..._w, {
     x: w.x ?? globalThis?.innerWidth / 4,
     y: w.y ?? globalThis?.innerHeight / 4,
     title: w.title ?? "Untitled",
-    programId: w.programId || "ie",
+    programId: w.programId || "help",
     resizable: w.resizable ?? true,
     view: "normal",
     minWidth: w.minWidth ?? 200,
