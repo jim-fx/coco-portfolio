@@ -21,7 +21,7 @@ var introduction = `
 <br>
 
 ## TODOS für euch
-1. [Github (Pages) einrichten](/content/todo.md)
+1. [Github (Pages) einrichten](/content/todo.md) [→](@todo)
 
 
 <br>

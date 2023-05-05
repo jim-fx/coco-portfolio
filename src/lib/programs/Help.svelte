@@ -1,23 +1,37 @@
 <script lang="ts">
 	import { tick } from 'svelte';
 	import historyStore from 'lib/stores/historyStore';
-	import type { CustomWindow } from 'lib/data';
+	import { createWindow, type CustomWindow } from 'lib/data';
 	import { base } from '$app/paths';
+	import HTML from '$lib/helpers/HTML.svelte';
 	import { renderMarkdown } from 'lib/helpers/renderMarkdown';
+	import type { ProgramID } from '.';
 
 	export let w: CustomWindow;
 	w.title = 'Help';
-	let contentWrapper: HTMLDivElement;
 	let path = historyStore('/content/index.md');
 	let content = '';
 
-	$: forwardPossible = path?.nextValue !== null;
-	$: backwardPossible = path?.previousValue !== null;
+	$: forwardPossible = $path && path?.nextValue !== null;
+	$: backwardPossible = $path && path?.previousValue !== null;
 
-	function updateLinks() {
+	function updateLinks(contentWrapper: HTMLElement) {
+		console.log({ contentWrapper });
 		if (!contentWrapper) return '';
 		contentWrapper.querySelectorAll('a').forEach((a) => {
 			let newPath = a.getAttribute('href');
+
+			if (newPath && newPath.startsWith('@')) {
+				let p = newPath;
+				a.addEventListener('click', (e) => {
+					e.stopPropagation();
+					e.preventDefault();
+					createWindow({
+						programId: p.slice(1) as ProgramID
+					});
+				});
+			}
+
 			if (!newPath?.endsWith('.md')) {
 				a.setAttribute('target', '_blank');
 				return;
@@ -32,14 +46,11 @@
 		});
 		return '';
 	}
-	$: if (contentWrapper) updateLinks();
 
 	async function render(url: string) {
 		const response = await fetch(base + url);
 		const input = await response.text();
 		content = await renderMarkdown(input);
-		await tick();
-		setTimeout(updateLinks, 100);
 	}
 
 	$: if ($path) {
@@ -52,8 +63,8 @@
 	<button disabled={!forwardPossible} on:click={() => path.redo()}>Forward</button>
 </div>
 {#if path}
-	<div class="content" bind:this={contentWrapper}>
-		{@html content}
+	<div class="content">
+		<HTML html={content} on:html={(ev) => updateLinks(ev.detail)} />
 	</div>
 {/if}
 
