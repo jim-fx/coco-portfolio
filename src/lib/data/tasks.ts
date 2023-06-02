@@ -66,14 +66,29 @@ export default [
     date: new Date('2023-05-19')
   },
   {
-    id: "tbd",
-    name: "tdb",
-    date: new Date('2023-05-19')
+    id: "css-layout-grid",
+    name: "Layouts with CSS Grids",
+    date: new Date('2023-06-02'),
+    tasks: [
+      {
+        id: "css-layout-grid-listen",
+        name: "Listen to the introduction"
+      },
+      {
+        id: "css-layout-grid-exercise",
+        name: `Do the exercise
+        `
+      },
+      {
+        id: "css-layout-grid-generator",
+        name: "Use a grid generator to layout"
+      }
+    ]
   },
   {
     id: "tbd",
     name: "tdb",
-    date: new Date('2023-06-02')
+    date: new Date('2023-06-16')
   },
   {
     id: "tbd",

@@ -32,7 +32,7 @@ var introduction = `
 - [Maja's Website](https://mkawecki0.github.io)
 - [Dome's Website](https://domebour.github.io)
 - [Julian's Website](https://juliangrafen.github.io/portfolio)
-- [Emma's Website](https://em-cotter.github.io)
+- [Emma's Website](https://em-cotter.github.io/website/)
 
 
 <br>
